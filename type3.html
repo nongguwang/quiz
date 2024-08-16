@@ -10,34 +10,73 @@
     <h1>4지선다</h1>
     
     <div id="question-area">
-        <p>1. 다음 중 유산소 운동이 아닌 것은?</p>
-        <input type="radio" name="q1" value="1"> 조깅<br>
-        <input type="radio" name="q1" value="2"> 수영<br>
-        <input type="radio" name="q1" value="3"> 벤치프레스<br>
-        <input type="radio" name="q1" value="4"> 자전거 타기<br>
-
-        <p>2. 근력 운동의 주요 효과가 아닌 것은?</p>
-        <input type="radio" name="q2" value="1"> 근육량 증가<br>
-        <input type="radio" name="q2" value="2"> 기초 대사량 증가<br>
-        <input type="radio" name="q2" value="3"> 체지방 감소<br>
-        <input type="radio" name="q2" value="4"> 심폐지구력 향상<br>
-
-        <p>3. 다음 중 스트레칭의 효과가 아닌 것은?</p>
-        <input type="radio" name="q3" value="1"> 유연성 향상<br>
-        <input type="radio" name="q3" value="2"> 근육 이완<br>
-        <input type="radio" name="q3" value="3"> 근력 증가<br>
-        <input type="radio" name="q3" value="4"> 부상 예방<br>
-
-        <button class="btn" onclick="checkAnswers()">정답 확인</button>
-        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
+        <div class="question active" id="q1">
+            <p>1. 다음 중 유산소 운동이 아닌 것은?</p>
+            <input type="radio" name="q1" value="1"> 조깅<br>
+            <input type="radio" name="q1" value="2"> 수영<br>
+            <input type="radio" name="q1" value="3"> 벤치프레스<br>
+            <input type="radio" name="q1" value="4"> 자전거 타기<br>
+        </div>
+        <div class="question" id="q2">
+            <p>2. 근력 운동의 주요 효과가 아닌 것은?</p>
+            <input type="radio" name="q2" value="1"> 근육량 증가<br>
+            <input type="radio" name="q2" value="2"> 기초 대사량 증가<br>
+            <input type="radio" name="q2" value="3"> 체지방 감소<br>
+            <input type="radio" name="q2" value="4"> 심폐지구력 향상<br>
+        </div>
+        <div class="question" id="q3">
+            <p>3. 다음 중 스트레칭의 효과가 아닌 것은?</p>
+            <input type="radio" name="q3" value="1"> 유연성 향상<br>
+            <input type="radio" name="q3" value="2"> 근육 이완<br>
+            <input type="radio" name="q3" value="3"> 근력 증가<br>
+            <input type="radio" name="q3" value="4"> 부상 예방<br>
+        </div>
+        <div class="btn-container">
+            <button class="btn" id="prevBtn" onclick="prevQuestion()" style="display: none;">이전 문제</button>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()">다음 문제</button>
+        </div>
     </div>
 
     <div id="result" style="display: none;">
         <h2>결과</h2>
         <p>당신의 점수: <span id="score"></span> / 3</p>
+        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
     </div>
 
     <script>
+        let currentQuestion = 1;
+        const totalQuestions = 3;
+
+        function updateButtons() {
+            document.getElementById('prevBtn').style.display = currentQuestion > 1 ? 'block' : 'none';
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('nextBtn').textContent = '정답 확인';
+            } else {
+                document.getElementById('nextBtn').textContent = '다음 문제';
+            }
+        }
+
+        function showQuestion(n) {
+            document.querySelector('.question.active').classList.remove('active');
+            document.getElementById('q' + n).classList.add('active');
+            currentQuestion = n;
+            updateButtons();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                showQuestion(currentQuestion + 1);
+            } else {
+                checkAnswers();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
         function checkAnswers() {
             const answers = [
                 document.querySelector('input[name="q1"]:checked'),
@@ -54,8 +93,11 @@
             }
 
             document.getElementById('score').textContent = score;
+            document.getElementById('question-area').style.display = 'none';
             document.getElementById('result').style.display = 'block';
         }
+
+        updateButtons();
     </script>
 </body>
 </html>
