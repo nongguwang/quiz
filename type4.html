@@ -10,27 +10,65 @@
     <h1>서술형</h1>
     
     <div id="question-area">
-        <p>1. 운동이 건강에 미치는 긍정적인 영향을 세 가지 이상 설명하세요.</p>
-        <textarea id="answer1" rows="4" cols="50"></textarea>
-        
-        <p>2. 근력 운동과 유산소 운동의 차이점을 설명하세요.</p>
-        <textarea id="answer2" rows="4" cols="50"></textarea>
-        
-        <p>3. 운동 전후 스트레칭의 중요성에 대해 설명하세요.</p>
-        <textarea id="answer3" rows="4" cols="50"></textarea>
-        
-        <br>
-        <button class="btn" onclick="submitAnswers()">답안 제출</button>
-        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
+        <div class="question active" id="q1">
+            <p>1. 운동이 건강에 미치는 긍정적인 영향을 세 가지 이상 설명하세요.</p>
+            <textarea id="answer1" rows="4" cols="50"></textarea>
+        </div>
+        <div class="question" id="q2">
+            <p>2. 근력 운동과 유산소 운동의 차이점을 설명하세요.</p>
+            <textarea id="answer2" rows="4" cols="50"></textarea>
+        </div>
+        <div class="question" id="q3">
+            <p>3. 운동 전후 스트레칭의 중요성에 대해 설명하세요.</p>
+            <textarea id="answer3" rows="4" cols="50"></textarea>
+        </div>
+        <div class="btn-container">
+            <button class="btn" id="prevBtn" onclick="prevQuestion()" style="display: none;">이전 문제</button>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()">다음 문제</button>
+        </div>
     </div>
 
     <div id="result" style="display: none;">
         <h2>결과</h2>
         <p>답안이 제출되었습니다. 감사합니다!</p>
-        <p>글자 수: <span id="charCount"></span></p>
+        <p>총 글자 수: <span id="charCount"></span></p>
+        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
     </div>
 
     <script>
+        let currentQuestion = 1;
+        const totalQuestions = 3;
+
+        function updateButtons() {
+            document.getElementById('prevBtn').style.display = currentQuestion > 1 ? 'block' : 'none';
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('nextBtn').textContent = '답안 제출';
+            } else {
+                document.getElementById('nextBtn').textContent = '다음 문제';
+            }
+        }
+
+        function showQuestion(n) {
+            document.querySelector('.question.active').classList.remove('active');
+            document.getElementById('q' + n).classList.add('active');
+            currentQuestion = n;
+            updateButtons();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                showQuestion(currentQuestion + 1);
+            } else {
+                submitAnswers();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
         function submitAnswers() {
             const answers = [
                 document.getElementById('answer1').value,
@@ -41,8 +79,11 @@
             let totalChars = answers.reduce((sum, answer) => sum + answer.length, 0);
             
             document.getElementById('charCount').textContent = totalChars;
+            document.getElementById('question-area').style.display = 'none';
             document.getElementById('result').style.display = 'block';
         }
+
+        updateButtons();
     </script>
 </body>
 </html>
