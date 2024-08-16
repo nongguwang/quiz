@@ -10,28 +10,67 @@
     <h1>O/X 문제</h1>
     
     <div id="question-area">
-        <p>1. 유산소 운동은 체지방 감소에 효과적이다.</p>
-        <input type="radio" name="q1" value="O"> O
-        <input type="radio" name="q1" value="X"> X
-        <br>
-        <p>2. 근력 운동은 기초 대사량을 낮춘다.</p>
-        <input type="radio" name="q2" value="O"> O
-        <input type="radio" name="q2" value="X"> X
-        <br>
-        <p>3. 스트레칭은 운동 전에만 해야 한다.</p>
-        <input type="radio" name="q3" value="O"> O
-        <input type="radio" name="q3" value="X"> X
-        <br>
-        <button class="btn" onclick="checkAnswers()">정답 확인</button>
-        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
+        <div class="question active" id="q1">
+            <p>1. 유산소 운동은 체지방 감소에 효과적이다.</p>
+            <input type="radio" name="q1" value="O"> O
+            <input type="radio" name="q1" value="X"> X
+        </div>
+        <div class="question" id="q2">
+            <p>2. 근력 운동은 기초 대사량을 낮춘다.</p>
+            <input type="radio" name="q2" value="O"> O
+            <input type="radio" name="q2" value="X"> X
+        </div>
+        <div class="question" id="q3">
+            <p>3. 스트레칭은 운동 전에만 해야 한다.</p>
+            <input type="radio" name="q3" value="O"> O
+            <input type="radio" name="q3" value="X"> X
+        </div>
+        <div class="btn-container">
+            <button class="btn" id="prevBtn" onclick="prevQuestion()" style="display: none;">이전 문제</button>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()">다음 문제</button>
+        </div>
     </div>
 
     <div id="result" style="display: none;">
         <h2>결과</h2>
         <p>당신의 점수: <span id="score"></span> / 3</p>
+        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
     </div>
 
     <script>
+        let currentQuestion = 1;
+        const totalQuestions = 3;
+
+        function updateButtons() {
+            document.getElementById('prevBtn').style.display = currentQuestion > 1 ? 'block' : 'none';
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('nextBtn').textContent = '정답 확인';
+            } else {
+                document.getElementById('nextBtn').textContent = '다음 문제';
+            }
+        }
+
+        function showQuestion(n) {
+            document.querySelector('.question.active').classList.remove('active');
+            document.getElementById('q' + n).classList.add('active');
+            currentQuestion = n;
+            updateButtons();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                showQuestion(currentQuestion + 1);
+            } else {
+                checkAnswers();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
         function checkAnswers() {
             const answers = [
                 document.querySelector('input[name="q1"]:checked'),
@@ -48,8 +87,11 @@
             }
 
             document.getElementById('score').textContent = score;
+            document.getElementById('question-area').style.display = 'none';
             document.getElementById('result').style.display = 'block';
         }
+
+        updateButtons();
     </script>
 </body>
 </html>
