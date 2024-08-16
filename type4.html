@@ -10,21 +10,38 @@
     <h1>서술형</h1>
     
     <div id="question-area">
-        <p>운동이 건강에 미치는 긍정적인 영향을 세 가지 이상 설명하세요.</p>
-        <textarea id="essay" rows="4" cols="50"></textarea>
+        <p>1. 운동이 건강에 미치는 긍정적인 영향을 세 가지 이상 설명하세요.</p>
+        <textarea id="answer1" rows="4" cols="50"></textarea>
+        
+        <p>2. 근력 운동과 유산소 운동의 차이점을 설명하세요.</p>
+        <textarea id="answer2" rows="4" cols="50"></textarea>
+        
+        <p>3. 운동 전후 스트레칭의 중요성에 대해 설명하세요.</p>
+        <textarea id="answer3" rows="4" cols="50"></textarea>
+        
         <br>
-        <button class="btn" onclick="submitEssay()">답안 제출</button>
+        <button class="btn" onclick="submitAnswers()">답안 제출</button>
         <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
     </div>
 
+    <div id="result" style="display: none;">
+        <h2>결과</h2>
+        <p>답안이 제출되었습니다. 감사합니다!</p>
+        <p>글자 수: <span id="charCount"></span></p>
+    </div>
+
     <script>
-        function submitEssay() {
-            const essay = document.getElementById('essay').value;
-            if (essay.length > 0) {
-                alert('답안이 제출되었습니다. 감사합니다!');
-            } else {
-                alert('답안을 작성해주세요.');
-            }
+        function submitAnswers() {
+            const answers = [
+                document.getElementById('answer1').value,
+                document.getElementById('answer2').value,
+                document.getElementById('answer3').value
+            ];
+            
+            let totalChars = answers.reduce((sum, answer) => sum + answer.length, 0);
+            
+            document.getElementById('charCount').textContent = totalChars;
+            document.getElementById('result').style.display = 'block';
         }
     </script>
 </body>
