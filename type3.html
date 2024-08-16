@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4지선다</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>4지선다</h1>
+    
+    <div id="question-area">
+        <p>다음 중 유산소 운동이 아닌 것은?</p>
+        <input type="radio" name="multi" value="1"> 조깅<br>
+        <input type="radio" name="multi" value="2"> 수영<br>
+        <input type="radio" name="multi" value="3"> 벤치프레스<br>
+        <input type="radio" name="multi" value="4"> 자전거 타기<br>
+        <button class="btn" onclick="checkAnswer()">정답 확인</button>
+        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            const answer = document.querySelector('input[name="multi"]:checked');
+            if (answer && answer.value === '3') {
+                alert('정답입니다!');
+            } else {
+                alert('틀렸습니다. 다시 시도해보세요.');
+            }
+        }
+    </script>
+</body>
+</html>
