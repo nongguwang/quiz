@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서술형</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>서술형</h1>
+    
+    <div id="question-area">
+        <p>운동이 건강에 미치는 긍정적인 영향을 세 가지 이상 설명하세요.</p>
+        <textarea id="essay" rows="4" cols="50"></textarea>
+        <br>
+        <button class="btn" onclick="submitEssay()">답안 제출</button>
+        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
+    </div>
+
+    <script>
+        function submitEssay() {
+            const essay = document.getElementById('essay').value;
+            if (essay.length > 0) {
+                alert('답안이 제출되었습니다. 감사합니다!');
+            } else {
+                alert('답안을 작성해주세요.');
+            }
+        }
+    </script>
+</body>
+</html>
