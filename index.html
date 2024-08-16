@@ -4,103 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>운동 학습 홈페이지</title>
-    <style>
-        /* 여기에 CSS 스타일을 추가하세요 */
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>운동 학습 홈페이지</h1>
     
     <div id="question-type-buttons">
-        <button onclick="showQuestionType(1)">유형 1: 빈칸 채우기</button>
-        <button onclick="showQuestionType(2)">유형 2: O/X</button>
-        <button onclick="showQuestionType(3)">유형 3: 4지선다</button>
-        <button onclick="showQuestionType(4)">유형 4: 서술형</button>
+        <button class="btn" onclick="location.href='type1.html'">유형 1: 빈칸 채우기</button>
+        <button class="btn" onclick="location.href='type2.html'">유형 2: O/X</button>
+        <button class="btn" onclick="location.href='type3.html'">유형 3: 4지선다</button>
+        <button class="btn" onclick="location.href='type4.html'">유형 4: 서술형</button>
     </div>
-
-    <div id="question-area">
-        <!-- 여기에 선택된 유형의 문제가 표시됩니다 -->
-    </div>
-
-    <script>
-        function showQuestionType(type) {
-            const questionArea = document.getElementById('question-area');
-            let questionHTML = '';
-
-            switch(type) {
-                case 1:
-                    questionHTML = `
-                        <h2>빈칸 채우기</h2>
-                        <p>다음 문장의 빈칸을 채우세요:</p>
-                        <p>근력 운동은 <input type="text" id="answer1"> 를 증가시키는데 효과적입니다.</p>
-                        <button onclick="checkAnswer(1)">정답 확인</button>
-                    `;
-                    break;
-                case 2:
-                    questionHTML = `
-                        <h2>O/X 문제</h2>
-                        <p>유산소 운동은 체지방 감소에 효과적이다.</p>
-                        <input type="radio" name="ox" value="O"> O
-                        <input type="radio" name="ox" value="X"> X
-                        <br>
-                        <button onclick="checkAnswer(2)">정답 확인</button>
-                    `;
-                    break;
-                case 3:
-                    questionHTML = `
-                        <h2>4지선다</h2>
-                        <p>다음 중 유산소 운동이 아닌 것은?</p>
-                        <input type="radio" name="multi" value="1"> 조깅
-                        <input type="radio" name="multi" value="2"> 수영
-                        <input type="radio" name="multi" value="3"> 벤치프레스
-                        <input type="radio" name="multi" value="4"> 자전거 타기
-                        <br>
-                        <button onclick="checkAnswer(3)">정답 확인</button>
-                    `;
-                    break;
-                case 4:
-                    questionHTML = `
-                        <h2>서술형</h2>
-                        <p>운동이 건강에 미치는 긍정적인 영향을 세 가지 이상 설명하세요.</p>
-                        <textarea id="essay" rows="4" cols="50"></textarea>
-                        <br>
-                        <button onclick="checkAnswer(4)">답안 제출</button>
-                    `;
-                    break;
-            }
-
-            questionArea.innerHTML = questionHTML;
-        }
-
-        function checkAnswer(type) {
-            // 여기에 각 문제 유형별 정답 확인 로직을 구현하세요
-            alert("정답 확인 기능은 아직 구현되지 않았습니다.");
-        }
-    </script>
-
-    <!-- 문제 추가 영역 -->
-    <!--
-    문제를 추가하려면 위의 showQuestionType 함수 내의 각 case에 새로운 문제를 추가하세요.
-    예를 들어, 빈칸 채우기 문제를 추가하려면:
-
-    case 1:
-        questionHTML += `
-            <p>새로운 빈칸 채우기 문제: ______ 은/는 중요한 운동 원칙입니다.</p>
-            <input type="text" id="newAnswer">
-            <button onclick="checkNewAnswer()">정답 확인</button>
-        `;
-        break;
-
-    그리고 checkNewAnswer() 함수를 script 태그 안에 추가하세요:
-
-    function checkNewAnswer() {
-        const answer = document.getElementById('newAnswer').value;
-        if (answer.toLowerCase() === '점진적 과부하') {
-            alert('정답입니다!');
-        } else {
-            alert('틀렸습니다. 다시 시도해보세요.');
-        }
-    }
-    -->
 </body>
 </html>
