@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O/X 문제</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>O/X 문제</h1>
+    
+    <div id="question-area">
+        <p>유산소 운동은 체지방 감소에 효과적이다.</p>
+        <input type="radio" name="ox" value="O"> O
+        <input type="radio" name="ox" value="X"> X
+        <br>
+        <button class="btn" onclick="checkAnswer()">정답 확인</button>
+        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            const answer = document.querySelector('input[name="ox"]:checked');
+            if (answer && answer.value === 'O') {
+                alert('정답입니다!');
+            } else {
+                alert('틀렸습니다. 다시 시도해보세요.');
+            }
+        }
+    </script>
+</body>
+</html>
