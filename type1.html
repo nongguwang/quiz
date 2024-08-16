@@ -5,16 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>빈칸 채우기</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <h1>빈칸 채우기</h1>
     
     <div id="question-area">
-        <p>1. 근력 운동은 <input type="text" id="answer1"> 를 증가시키는데 효과적입니다.</p>
-        <p>2. 유산소 운동은 <input type="text" id="answer2"> 을/를 개선하는데 도움이 됩니다.</p>
-        <p>3. 스트레칭은 <input type="text" id="answer3"> 을/를 향상시키는 운동입니다.</p>
-        <button class="btn" onclick="checkAnswers()">정답 확인</button>
-        <button class="btn" onclick="location.href='index.html'">메인으로 돌아가기</button>
+        <div class="question active" id="q1">
+            <p>1. 근력 운동은 <input type="text" id="answer1"> 를 증가시키는데 효과적입니다.</p>
+            <button class="btn" onclick="nextQuestion(1)">다음 문제</button>
+        </div>
+        <div class="question" id="q2">
+            <p>2. 유산소 운동은 <input type="text" id="answer2"> 을/를 개선하는데 도움이 됩니다.</p>
+            <button class="btn" onclick="nextQuestion(2)">다음 문제</button>
+        </div>
+        <div class="question" id="q3">
+            <p>3. 스트레칭은 <input type="text" id="answer3"> 을/를 향상시키는 운동입니다.</p>
+            <button class="btn" onclick="checkAnswers()">정답 확인</button>
+        </div>
+        <button class="btn" onclick="location.href='index.html'" style="margin-top: 20px;">메인으로 돌아가기</button>
     </div>
 
     <div id="result" style="display: none;">
@@ -23,6 +39,11 @@
     </div>
 
     <script>
+        function nextQuestion(currentQuestion) {
+            document.getElementById('q' + currentQuestion).classList.remove('active');
+            document.getElementById('q' + (currentQuestion + 1)).classList.add('active');
+        }
+
         function checkAnswers() {
             const answers = [
                 document.getElementById('answer1').value.toLowerCase(),
@@ -40,6 +61,7 @@
 
             document.getElementById('score').textContent = score;
             document.getElementById('result').style.display = 'block';
+            document.getElementById('q3').style.display = 'none';
         }
     </script>
 </body>
